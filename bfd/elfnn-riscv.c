@@ -631,7 +631,7 @@ static bfd_boolean ReleaseExportEntry(void)
 	return TRUE;
 }
 
-static bfd_boolean InsertImportEntry(const char *Name, Elf_Internal_Rela *Rel, bfd_vma OutOffset, bfd_boolean Collect)
+static bfd_boolean InsertImportEntry(const char *Name, const Elf_Internal_Rela *Rel, bfd_vma OutOffset, bfd_boolean Collect)
 
 {
 	unsigned int Index = hash_sdbm(Name);
@@ -639,7 +639,7 @@ static bfd_boolean InsertImportEntry(const char *Name, Elf_Internal_Rela *Rel, b
 	PulpImportEntry *PtPrevEntry = NULL;
 	PulpImportRef *Ref, *PtRef;
 	static PulpImportEntry *LastEntry = NULL;
-	static Elf_Internal_Rela *LastRel = NULL;
+	static const Elf_Internal_Rela *LastRel = NULL;
 
 	while (PtEntry && (strcmp(PtEntry->Name, Name) != 0)) {
 		PtPrevEntry = PtEntry; PtEntry = PtEntry->Next;
@@ -1244,7 +1244,7 @@ riscv_elf_check_relocs (bfd *abfd, struct bfd_link_info *info,
   struct riscv_elf_link_hash_table *htab;
   Elf_Internal_Shdr *symtab_hdr;
   struct elf_link_hash_entry **sym_hashes;
-  Elf_Internal_Rela *rel;
+  const Elf_Internal_Rela *rel;
   asection *sreloc = NULL;
 
   if (bfd_link_relocatable (info))
@@ -4126,7 +4126,7 @@ riscv_elf_object_p (bfd *abfd)
   return TRUE;
 }
 
-bfd_boolean
+static bfd_boolean
 _bfd_riscv_elfNN_final_link (bfd *abfd, struct bfd_link_info *info)
 
 {
