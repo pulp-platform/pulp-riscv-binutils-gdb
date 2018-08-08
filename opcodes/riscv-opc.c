@@ -1286,8 +1286,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.cmpleu.b",		"Xpulpv2", "d,s,t",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.cmpleu.sc.b",	"Xpulpv2", "d,s,t",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VR,	MASK_V_OP,	match_opcode,	0},
 {"pv.cmpleu.sci.b",	"Xpulpv2", "d,s,bu",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VI,	MASK_V_OP1,	match_opcode,	0},
-{"p.beqimm",       	"Xpulpv2",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,   0},
-{"p.bneimm",       	"Xpulpv2",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   0},
+{"p.beqimm",       	"Xpulpv2",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,   INSN_CONDBRANCH},
+{"p.bneimm",       	"Xpulpv2",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   INSN_CONDBRANCH},
 
 /* Load from event unit */
 
@@ -1717,8 +1717,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.cmpleu.b",		"Xgap8", "d,s,t",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VV,	MASK_V_OP,	match_opcode,	0},
 {"pv.cmpleu.sc.b",	"Xgap8", "d,s,t",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VR,	MASK_V_OP,	match_opcode,	0},
 {"pv.cmpleu.sci.b",	"Xgap8", "d,s,bu",	MATCH_V_OP_CMPLEU|MATCH_V_OP_B_VI,	MASK_V_OP1,	match_opcode,	0},
-{"p.beqimm",       	"Xgap8",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,   0},
-{"p.bneimm",       	"Xgap8",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   0},
+{"p.beqimm",       	"Xgap8",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,   INSN_CONDBRANCH},
+{"p.bneimm",       	"Xgap8",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   INSN_CONDBRANCH},
 
 /* Load from event unit */
 
@@ -2183,8 +2183,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.ball",       	"Xpulpv3",  "s,p",  	MATCH_BEQM1, 			MASK_BEQM1|MASK_RS2, 	match_opcode,   },
 {"pv.bnall",       	"Xpulpv3",  "s,p",  	MATCH_BNEM1, 			MASK_BNEM1|MASK_RS2, 	match_opcode,   },
 */
-{"p.beqimm",       	"Xpulpv3",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,    0},
-{"p.bneimm",       	"Xpulpv3",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,    0},
+{"p.beqimm",       	"Xpulpv3",  "s,bI,p",  	MATCH_BEQM1, 				MASK_BEQM1, 	match_opcode,   INSN_CONDBRANCH},
+{"p.bneimm",       	"Xpulpv3",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   INSN_CONDBRANCH},
 
 /* Load from event unit */
 
