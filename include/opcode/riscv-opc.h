@@ -1045,6 +1045,13 @@
 #define	MATCH_V_OP_CMPLTU 0x44000000
 #define	MATCH_V_OP_CMPLEU 0x4C000000
 
+/* Renzo extensions */
+#define	MASK_PL_OP_SDOTSP  0xFE00707F
+#define	MASK_PL_OP         0xFFF0707F
+#define	MATCH_PL_OP_SDOTSP 0xB8000077
+#define	MATCH_PL_OP_TANH   0xF8000077
+#define	MATCH_PL_OP_SIG    0xF8001077
+
 /* __GAP8 Start */
 
 /* Gap8 */
