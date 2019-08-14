@@ -1291,7 +1291,8 @@ const struct riscv_opcode riscv_opcodes[] =
 {"p.bneimm",       	"Xpulpv2",  "s,bI,p",  	MATCH_BNEM1, 				MASK_BNEM1, 	match_opcode,   0},
 
 /* Renzo extensions */
-{"pl.sdotsp.h",   "Xpulpv2", "d,s,t", MATCH_PL_OP_SDOTSP, MASK_PL_OP_SDOTSP,  match_opcode, 0},
+{"pl.sdotsp.h.0",   "Xpulpv2", "d,s,t", MATCH_PL_OP_SDOTSP_0, MASK_PL_OP_SDOTSP_0,  match_opcode, 0},
+{"pl.sdotsp.h.1",   "Xpulpv2", "d,s,t", MATCH_PL_OP_SDOTSP_1, MASK_PL_OP_SDOTSP_1,  match_opcode, 0},
 {"pl.tanh",       "Xpulpv2", "d,s",   MATCH_PL_OP_TANH, MASK_PL_OP,  match_opcode, 0},
 {"pl.sig",        "Xpulpv2", "d,s",   MATCH_PL_OP_SIG, MASK_PL_OP,  match_opcode, 0},
 
