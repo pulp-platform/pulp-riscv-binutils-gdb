@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_ARPARSE_H_INCLUDED
-# define YY_YY_ARPARSE_H_INCLUDED
+#ifndef YY_YY__HOME_ERIC_GCCRISCV_RISCV_GNU_TOOLCHAIN_RISCV_BINUTILS_GDB_BINUTILS_ARPARSE_H_INCLUDED
+# define YY_YY__HOME_ERIC_GCCRISCV_RISCV_GNU_TOOLCHAIN_RISCV_BINUTILS_GDB_BINUTILS_ARPARSE_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -87,17 +87,19 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 37 "arparse.y" /* yacc.c:1915  */
+#line 37 "/home/eric/GccRiscv/riscv-gnu-toolchain/riscv-binutils-gdb/binutils/arparse.y" /* yacc.c:1909  */
 
   char *name;
 struct list *list ;
 
 
-#line 100 "arparse.h" /* yacc.c:1915  */
+#line 100 "/home/eric/GccRiscv/riscv-gnu-toolchain/riscv-binutils-gdb/binutils/arparse.h" /* yacc.c:1909  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -107,4 +109,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_ARPARSE_H_INCLUDED  */
+#endif /* !YY_YY__HOME_ERIC_GCCRISCV_RISCV_GNU_TOOLCHAIN_RISCV_BINUTILS_GDB_BINUTILS_ARPARSE_H_INCLUDED  */
