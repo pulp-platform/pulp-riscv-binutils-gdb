@@ -2987,6 +2987,12 @@ const struct riscv_opcode riscv_opcodes[] =
 {"sgt.d",	"Xgap9", "d,t,s",  	MATCH_SLT_D, 			MASK_PALU,		match_opcode, INSN_ALIAS },
 {"sgtu.d",	"Xgap9", "d,t,s",  	MATCH_SLTU_D, 			MASK_PALU,		match_opcode, INSN_ALIAS },
 
+{"seqz.d",      "Xgap9", "d,s",		MATCH_SLTIU_D|ENCODE_I5_1_TYPE_IMM(1), MASK_PALU1 | ENCODE_I5_1_TYPE_IMM(-1U), match_opcode, INSN_ALIAS },
+{"snez.d",      "Xgap9", "d,t",		MATCH_SLTU_D, 			MASK_PALU | MASK_RS1, 	match_opcode, INSN_ALIAS },
+{"sltz.d",      "Xgap9", "d,s",		MATCH_SLT_D, 			MASK_PALU | MASK_RS2,	match_opcode, INSN_ALIAS },
+{"sgtz.d",      "Xgap9", "d,t",		MATCH_SLT_D, 			MASK_PALU | MASK_RS1,	match_opcode, INSN_ALIAS },
+
+
 /***********************************************************************************************************************/
 /**************************************     End of Gap9              ***************************************************/
 /***********************************************************************************************************************/
