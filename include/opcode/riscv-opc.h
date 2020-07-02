@@ -543,16 +543,17 @@
 #define	CSR_PCER	0x7a0
 #define	CSR_PCMR	0x7a1
 
-#define	CSR_LPS0	0x7b0
-#define	CSR_LPE0	0x7b1
-#define	CSR_LPC0	0x7b2
+#define	CSR_LPS0	0x800
+#define	CSR_LPE0	0x801
+#define	CSR_LPC0	0x802
 
-#define	CSR_LPS1	0x7b4
-#define	CSR_LPE1	0x7b5
-#define	CSR_LPC1	0x7b6
+#define	CSR_LPS1	0x804
+#define	CSR_LPE1	0x805
+#define	CSR_LPC1	0x806
 
-#define	CSR_PRIVLV	0xc10
-#define	CSR_UHARTID	0x14
+#define	CSR_PRIVLV	0xcc1
+#define CSR_FPREC	0x807
+#define	CSR_UHARTID	0xcc0
 #define	CSR_MHARTID	0xf14
 
 #define	CSR_PRIV_EMSTATUS	0x7c1
@@ -1716,6 +1717,7 @@ DECLARE_CSR(lpend1, CSR_LPE1)
 DECLARE_CSR(lpcount1, CSR_LPC1)
 
 DECLARE_CSR(privlv, CSR_PRIVLV)
+DECLARE_CSR(fprec, CSR_FPREC)	
 DECLARE_CSR(uhartid, CSR_UHARTID)
 DECLARE_CSR(mhartid, CSR_MHARTID)
 
