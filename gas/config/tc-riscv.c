@@ -218,6 +218,11 @@ riscv_set_arch (const char *s)
                         if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_RISCV) Pulp_Chip.processor = PULP_RISCV;
                         else as_fatal("-Xriscv: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
                         break;
+/* Xpulpimg extension */
+                case PULP_IMG:
+                        if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_IMG) Pulp_Chip.processor = PULP_IMG;
+                        else as_fatal("-Xpulpimg: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
+                        break;
                 case PULP_V0:
                         if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_V0) Pulp_Chip.processor = PULP_V0;
                         else as_fatal("-Xpulpv0: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
@@ -313,7 +318,7 @@ as_fatal ("#### unsupported pulp chip %s", p);
         riscv_set_arch ("RV32IMCXgap9");
 	as_fatal ("#### unsupported pulp chip %s", p);
         UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_GAP9]);
-	
+
   } else {
         as_fatal ("unsupported pulp chip %s", arg);
   }

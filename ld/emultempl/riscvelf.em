@@ -227,32 +227,32 @@ riscv_elf_before_allocation (void)
 
 	{
 	        struct bfd_link_hash_entry *h = NULL;
-	
+
 	        h = bfd_link_hash_lookup (link_info.hash, "pulp__PE", TRUE, FALSE, TRUE);
 	        // lang_update_definedness ("pulp__PE", h);
 	        if (NoMerge) h->u.def.value = DefChipInfo.Pulp_PE; else h->u.def.value = ChipInfo.Pulp_PE;
 	        h->type = bfd_link_hash_defined; h->u.def.section = abs_output_section->bfd_section;
-	
+
 	        h = bfd_link_hash_lookup (link_info.hash, "pulp__FC", TRUE, FALSE, TRUE);
 	        // lang_update_definedness ("pulp__FC", h);
 	        if (NoMerge) h->u.def.value = DefChipInfo.Pulp_FC; else h->u.def.value = ChipInfo.Pulp_FC;
 	        h->type = bfd_link_hash_defined; h->u.def.section = abs_output_section->bfd_section;
-	
+
 	        h = bfd_link_hash_lookup (link_info.hash, "pulp__L2", TRUE, FALSE, TRUE);
 	        // lang_update_definedness ("pulp__L2", h);
 	        if (NoMerge) h->u.def.value = DefChipInfo.Pulp_L2_Size; else h->u.def.value = ChipInfo.Pulp_L2_Size;
 	        h->type = bfd_link_hash_defined; h->u.def.section = abs_output_section->bfd_section;
-	
+
 	        h = bfd_link_hash_lookup (link_info.hash, "pulp__L1CL", TRUE, FALSE, TRUE);
 	        // lang_update_definedness ("pulp__L1CL", h);
 	        if (NoMerge) h->u.def.value = DefChipInfo.Pulp_L1_Cluster_Size; else h->u.def.value = ChipInfo.Pulp_L1_Cluster_Size;
 	        h->type = bfd_link_hash_defined; h->u.def.section = abs_output_section->bfd_section;
-	
+
 	        h = bfd_link_hash_lookup (link_info.hash, "pulp__L1FC", TRUE, FALSE, TRUE);
 	        // lang_update_definedness ("pulp__L1FC", h);
 	        if (NoMerge) h->u.def.value = DefChipInfo.Pulp_L1_FC_Size; else h->u.def.value = ChipInfo.Pulp_L1_FC_Size;
 	        h->type = bfd_link_hash_defined; h->u.def.section = abs_output_section->bfd_section;
-	
+
 	}
 
 
@@ -421,6 +421,11 @@ static void ParsePulpArch(const char *arg)
           while (*++q != '\0' && *q != '_') ;
           *q = '\0';
 	  switch (PulpDecodeCpu(p+1, &Len)) {
+		case PULP_IMG:
+/* Xpulpimg extension */
+                  	if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_IMG) Pulp_Chip.processor = PULP_IMG;
+                  	else einfo(_("%F -Xpulpimg: pulp architecture is already defined as %s"), PulpProcessorImage(Pulp_Chip.processor));
+      break;
 		case PULP_V0:
                   	if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_V0) Pulp_Chip.processor = PULP_V0;
                   	else einfo(_("%F -Xpulpv0: pulp architecture is already defined as %s"), PulpProcessorImage(Pulp_Chip.processor));
