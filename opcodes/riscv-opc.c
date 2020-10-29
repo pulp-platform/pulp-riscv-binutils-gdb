@@ -3560,20 +3560,29 @@ const struct riscv_opcode riscv_opcodes[] =
 
 
 /***********************************************************************************************************************/
-/**************************************     End of Gap9              ***************************************************/
-/***********************************************************************************************************************/
-
-/***********************************************************************************************************************/
 /**************************************           Xpulpimg           ***************************************************/
 /***********************************************************************************************************************/
-/* Xpulpimg extension */
 
-/* additional ALU operations */
-{"p.abs",   		"Xpulpimg", "d,s", 	MATCH_AVG,   				MASK_PALUS,  	match_opcode,	0},
-{"p.min",   		"Xpulpimg", "d,s,t", 	MATCH_MIN,   				MASK_PALU,  	match_opcode,	0},
-{"p.minu",  		"Xpulpimg", "d,s,t", 	MATCH_MINU,  				MASK_PALU,  	match_opcode,	0},
-{"p.max",   		"Xpulpimg", "d,s,t", 	MATCH_MAX,   				MASK_PALU,  	match_opcode,	0},
-{"p.maxu",  		"Xpulpimg", "d,s,t", 	MATCH_MAXU,  				MASK_PALU,  	match_opcode,	0},
+/* General ALU Operations */
+
+{"p.abs",    "Xpulpimg", "d,s", 	 MATCH_AVG,    MASK_PALUS, match_opcode, 0},
+{"p.slet",   "Xpulpimg", "d,s,t",  MATCH_SLET,   MASK_PALU,  match_opcode, 0},
+{"p.sletu",  "Xpulpimg", "d,s,t",  MATCH_SLETU,  MASK_PALU,  match_opcode, 0},
+{"p.min",    "Xpulpimg", "d,s,t",  MATCH_MIN,    MASK_PALU,  match_opcode, 0},
+{"p.minu",   "Xpulpimg", "d,s,t",  MATCH_MINU,   MASK_PALU,  match_opcode, 0},
+{"p.max",    "Xpulpimg", "d,s,t",  MATCH_MAX,    MASK_PALU,  match_opcode, 0},
+{"p.maxu",   "Xpulpimg", "d,s,t",  MATCH_MAXU,   MASK_PALU,  match_opcode, 0},
+{"p.exths",  "Xpulpimg", "d,s",    MATCH_EXTHS,  MASK_PALUS, match_opcode, 0},
+{"p.exthz",  "Xpulpimg", "d,s",    MATCH_EXTHZ,  MASK_PALUS, match_opcode, 0},
+{"p.extbs",  "Xpulpimg", "d,s",    MATCH_EXTBS,  MASK_PALUS, match_opcode, 0},
+{"p.extbz",  "Xpulpimg", "d,s",    MATCH_EXTBZ,  MASK_PALUS, match_opcode, 0},
+{"p.clip",   "Xpulpimg", "d,s,bi", MATCH_CLIP,   MASK_PALU1, match_opcode, 0},
+{"p.clipi",  "Xpulpimg", "d,s,bi", MATCH_CLIP,   MASK_PALU1, match_opcode, 0},
+{"p.clipr",  "Xpulpimg", "d,s,t",  MATCH_CLIPR,  MASK_PALU,  match_opcode, 0},
+{"p.clipu",  "Xpulpimg", "d,s,bi", MATCH_CLIPU,  MASK_PALU1, match_opcode, 0},
+{"p.clipui", "Xpulpimg", "d,s,bi", MATCH_CLIPU,  MASK_PALU1, match_opcode, 0},
+{"p.clipur", "Xpulpimg", "d,s,t",  MATCH_CLIPUR, MASK_PALU,  match_opcode, 0},
+
 
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
