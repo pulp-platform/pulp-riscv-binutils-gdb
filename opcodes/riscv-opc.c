@@ -3583,6 +3583,11 @@ const struct riscv_opcode riscv_opcodes[] =
 {"p.clipui", "Xpulpimg", "d,s,bi", MATCH_CLIPU,  MASK_PALU1, match_opcode, 0},
 {"p.clipur", "Xpulpimg", "d,s,t",  MATCH_CLIPUR, MASK_PALU,  match_opcode, 0},
 
+/* Immediate branching */
+
+{"p.beqimm", "Xpulpimg", "s,bI,p", MATCH_BEQM1,  MASK_BEQM1, match_opcode, 0},
+{"p.bneimm", "Xpulpimg", "s,bI,p", MATCH_BNEM1,  MASK_BNEM1, match_opcode, 0},
+
 
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
