@@ -3563,6 +3563,44 @@ const struct riscv_opcode riscv_opcodes[] =
 /**************************************           Xpulpimg           ***************************************************/
 /***********************************************************************************************************************/
 
+/* Post-increment and register-register loads */
+
+{"p.lb",  "Xpulpimg", "d,o(s)",  MATCH_LB,        MASK_LB,      match_opcode, 0},
+{"p.lb",  "Xpulpimg", "d,o(s!)", MATCH_LBPOST,    MASK_LPOST,   match_opcode, 0},
+{"p.lb",  "Xpulpimg", "d,t(s)",  MATCH_LBRR,      MASK_LRR,     match_opcode, 0},
+{"p.lb",  "Xpulpimg", "d,t(s!)", MATCH_LBRRPOST,  MASK_LRRPOST, match_opcode, 0},
+{"p.lbu", "Xpulpimg", "d,o(s)",  MATCH_LBU,       MASK_LBU,     match_opcode, 0},
+{"p.lbu", "Xpulpimg", "d,o(s!)", MATCH_LBUPOST,   MASK_LPOST,   match_opcode, 0},
+{"p.lbu", "Xpulpimg", "d,t(s)",  MATCH_LBURR,     MASK_LRR,     match_opcode, 0},
+{"p.lbu", "Xpulpimg", "d,t(s!)", MATCH_LBURRPOST, MASK_LRRPOST, match_opcode, 0},
+{"p.lh",  "Xpulpimg", "d,o(s)",  MATCH_LH,        MASK_LH,      match_opcode, 0},
+{"p.lh",  "Xpulpimg", "d,o(s!)", MATCH_LHPOST,    MASK_LPOST,   match_opcode, 0},
+{"p.lh",  "Xpulpimg", "d,t(s)",  MATCH_LHRR,      MASK_LRR,     match_opcode, 0},
+{"p.lh",  "Xpulpimg", "d,t(s!)", MATCH_LHRRPOST,  MASK_LRRPOST, match_opcode, 0},
+{"p.lhu", "Xpulpimg", "d,o(s)",  MATCH_LHU,       MASK_LHU,     match_opcode, 0},
+{"p.lhu", "Xpulpimg", "d,o(s!)", MATCH_LHUPOST,   MASK_LPOST,   match_opcode, 0},
+{"p.lhu", "Xpulpimg", "d,t(s)",  MATCH_LHURR,     MASK_LRR,     match_opcode, 0},
+{"p.lhu", "Xpulpimg", "d,t(s!)", MATCH_LHURRPOST, MASK_LRRPOST, match_opcode, 0},
+{"p.lw",  "Xpulpimg", "d,o(s)",  MATCH_LW,        MASK_LW,      match_opcode, 0},
+{"p.lw",  "Xpulpimg", "d,o(s!)", MATCH_LWPOST,    MASK_LPOST,   match_opcode, 0},
+{"p.lw",  "Xpulpimg", "d,t(s)",  MATCH_LWRR,      MASK_LRR,     match_opcode, 0},
+{"p.lw",  "Xpulpimg", "d,t(s!)", MATCH_LWRRPOST,  MASK_LRRPOST, match_opcode, 0},
+
+/* Post-increment and register-register stores */
+
+{"p.sb", "Xpulpimg", "t,q(s)",  MATCH_SB,       MASK_SB,    match_opcode, 0},
+{"p.sb", "Xpulpimg", "t,q(s!)", MATCH_SBPOST,   MASK_SPOST, match_opcode, 0},
+{"p.sb", "Xpulpimg", "t,d(s)",  MATCH_SBRR,     MASK_PALU,  match_opcode, 0},
+{"p.sb", "Xpulpimg", "t,d(s!)", MATCH_SBRRPOST, MASK_PALU,  match_opcode, 0},
+{"p.sh", "Xpulpimg", "t,q(s)",  MATCH_SH,       MASK_SH,    match_opcode, 0},
+{"p.sh", "Xpulpimg", "t,q(s!)", MATCH_SHPOST,   MASK_SPOST, match_opcode, 0},
+{"p.sh", "Xpulpimg", "t,d(s)",  MATCH_SHRR,     MASK_PALU,  match_opcode, 0},
+{"p.sh", "Xpulpimg", "t,d(s!)", MATCH_SHRRPOST, MASK_PALU,  match_opcode, 0},
+{"p.sw", "Xpulpimg", "t,q(s)",  MATCH_SW,       MASK_SW,    match_opcode, 0},
+{"p.sw", "Xpulpimg", "t,q(s!)", MATCH_SWPOST,   MASK_SPOST, match_opcode, 0},
+{"p.sw", "Xpulpimg", "t,d(s)",  MATCH_SWRR,     MASK_PALU,  match_opcode, 0},
+{"p.sw", "Xpulpimg", "t,d(s!)", MATCH_SWRRPOST, MASK_PALU,  match_opcode, 0},
+
 /* General ALU Operations */
 
 {"p.abs",    "Xpulpimg", "d,s", 	 MATCH_AVG,    MASK_PALUS, match_opcode, 0},
