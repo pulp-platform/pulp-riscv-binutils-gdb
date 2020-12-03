@@ -3626,6 +3626,17 @@ const struct riscv_opcode riscv_opcodes[] =
 {"p.beqimm", "Xpulpimg", "s,bI,p", MATCH_BEQM1,  MASK_BEQM1, match_opcode, 0},
 {"p.bneimm", "Xpulpimg", "s,bI,p", MATCH_BNEM1,  MASK_BNEM1, match_opcode, 0},
 
+/* Multiplications/divisions from M extension */
+
+{"p.mul",    "Xpulpimg", "d,s,t", MATCH_MUL, 	  MASK_MUL,    match_opcode, 0},
+{"p.mulh",   "Xpulpimg", "d,s,t", MATCH_MULH,   MASK_MULH,   match_opcode, 0},
+{"p.mulhu",  "Xpulpimg", "d,s,t", MATCH_MULHU,  MASK_MULHU,  match_opcode, 0},
+{"p.mulhsu", "Xpulpimg", "d,s,t", MATCH_MULHSU, MASK_MULHSU, match_opcode, 0},
+{"p.div",    "Xpulpimg", "d,s,t", MATCH_DIV, 	  MASK_DIV,    match_opcode, 0},
+{"p.divu",   "Xpulpimg", "d,s,t", MATCH_DIVU,   MASK_DIVU,   match_opcode, 0},
+{"p.rem",    "Xpulpimg", "d,s,t", MATCH_REM, 	  MASK_REM,    match_opcode, 0},
+{"p.remu",   "Xpulpimg", "d,s,t", MATCH_REMU,	  MASK_REMU,   match_opcode, 0},
+
 
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
