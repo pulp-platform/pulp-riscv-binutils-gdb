@@ -3637,6 +3637,10 @@ const struct riscv_opcode riscv_opcodes[] =
 {"p.rem",    "Xpulpimg", "d,s,t", MATCH_REM, 	  MASK_REM,    match_opcode, 0},
 {"p.remu",   "Xpulpimg", "d,s,t", MATCH_REMU,	  MASK_REMU,   match_opcode, 0},
 
+/* 32x32 into 32 MAC/MSU */
+
+{"p.mac", "Xpulpimg", "d,s,t", MATCH_MAC32, MASK_MACMSU32, match_opcode, 0},
+{"p.msu", "Xpulpimg", "d,s,t", MATCH_MSU32, MASK_MACMSU32, match_opcode, 0},
 
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
