@@ -3796,6 +3796,9 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.sdotusp.sc.b",  "Xpulpimg", "d,s,t",  MATCH_V_OP_SDOTSP|MATCH_V_OP_B_VR, MASK_V_OP,  match_opcode, 0},
 {"pv.sdotusp.sci.b", "Xpulpimg", "d,s,bs", MATCH_V_OP_SDOTSP|MATCH_V_OP_B_VI, MASK_V_OP1, match_opcode, 0},
 
+{"pv.shuffle2.h",	"Xpulpimg", "d,s,t",	MATCH_V_OP_SHUFFLE2|MATCH_V_OP_H_VV,	MASK_V_OP,	match_opcode,	0},
+{"pv.shuffle2.b",	"Xpulpimg", "d,s,t",	MATCH_V_OP_SHUFFLE2|MATCH_V_OP_B_VV,	MASK_V_OP,	match_opcode,	0},
+
 
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
