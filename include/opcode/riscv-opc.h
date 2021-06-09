@@ -1413,7 +1413,11 @@
 #define MATCH_VFCVT_AH_H 0x98601033
 #define MASK_VFCVT_AH_H  0xfff0707f
 
-
+/* Xqueues */
+#define MATCH_Q_PUSH 0x3800202f
+#define MASK_Q_PUSH  0xf800707f
+#define MATCH_Q_POP 0x3000202f
+#define MASK_Q_POP  0xf9f0707f
 
 #endif
 #ifdef DECLARE_INSN

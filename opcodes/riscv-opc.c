@@ -3804,6 +3804,23 @@ const struct riscv_opcode riscv_opcodes[] =
 /**************************************       End of Xpulpimg        ***************************************************/
 /***********************************************************************************************************************/
 
+/***********************************************************************************************************************/
+/**************************************  Xqueues (atomic extension)  ***************************************************/
+/***********************************************************************************************************************/
+
+{"q.push.w",      "A",   "d,t,0(s)",  MATCH_Q_PUSH, MASK_Q_PUSH | MASK_AQRL, match_opcode, 0 },
+{"q.pop.w",       "A",   "d,0(s)",    MATCH_Q_POP, MASK_Q_POP | MASK_AQRL, match_opcode, 0 },
+{"q.push.w.aq",   "A",   "d,t,0(s)",  MATCH_Q_PUSH | MASK_AQ, MASK_Q_PUSH | MASK_AQRL, match_opcode, 0 },
+{"q.pop.w.aq",    "A",   "d,0(s)",    MATCH_Q_POP | MASK_AQ, MASK_Q_POP | MASK_AQRL, match_opcode, 0 },
+{"q.push.w.rl",   "A",   "d,t,0(s)",  MATCH_Q_PUSH | MASK_RL, MASK_Q_PUSH | MASK_AQRL, match_opcode, 0 },
+{"q.pop.w.rl",    "A",   "d,0(s)",    MATCH_Q_POP | MASK_RL, MASK_Q_POP | MASK_AQRL, match_opcode, 0 },
+{"q.push.w.aqrl", "A",   "d,t,0(s)",  MATCH_Q_PUSH | MASK_AQRL, MASK_Q_PUSH | MASK_AQRL, match_opcode, 0 },
+{"q.pop.w.aqrl",  "A",   "d,0(s)",    MATCH_Q_POP | MASK_AQRL, MASK_Q_POP | MASK_AQRL, match_opcode, 0 },
+
+/***********************************************************************************************************************/
+/**************************************        End of Xqueues        ***************************************************/
+/***********************************************************************************************************************/
+
 /* Terminate the list.  */
 {0, 0, 0, 0, 0, 0, 0}
 };
