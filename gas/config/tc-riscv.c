@@ -34,7 +34,7 @@
 #include "opcode/riscv.h"
 
 #define _WITH_PULP_CHIP_INFO_FUNCT_
-#include "../../../riscv-gcc/gcc/config/riscv/riscv-opts.h"
+#include "../../../gcc/gcc/config/riscv/riscv-opts.h"
 
 #include <stdint.h>
 

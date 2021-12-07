@@ -838,6 +838,36 @@ static reloc_howto_type howto_table[] =
 	 FALSE),			/* pcrel_offset */
 
 
+  /* 32-bit PC relative.  */
+  HOWTO (R_RISCV_32_PCREL,		/* type */
+	 0,				/* rightshift */
+	 2,				/* size */
+	 32,				/* bitsize */
+	 TRUE,				/* pc_relative */
+	 0,				/* bitpos */
+	 complain_overflow_dont,	/* complain_on_overflow */
+	 bfd_elf_generic_reloc,		/* special_function */
+	 "R_RISCV_32_PCREL",		/* name */
+	 FALSE,				/* partial_inplace */
+	 0,				/* src_mask */
+	 0xffffffff,			/* dst_mask */
+	 FALSE),			/* pcrel_offset */
+
+  /* Relocation against a local ifunc symbol in a shared object.  */
+  HOWTO (R_RISCV_IRELATIVE,		/* type */
+	 0,				/* rightshift */
+	 2,				/* size */
+	 32,				/* bitsize */
+	 FALSE,				/* pc_relative */
+	 0,				/* bitpos */
+	 complain_overflow_dont,	/* complain_on_overflow */
+	 bfd_elf_generic_reloc,		/* special_function */
+	 "R_RISCV_IRELATIVE",		/* name */
+	 FALSE,				/* partial_inplace */
+	 0,				/* src_mask */
+	 0xffffffff,			/* dst_mask */
+	 FALSE),			/* pcrel_offset */
+
   /* Pulp specific */
   /* 12-bit PC-relative offset, for hwloop.  */
   HOWTO (R_RISCV_REL12,                 /* type */
