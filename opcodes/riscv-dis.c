@@ -75,6 +75,7 @@ riscv_set_arch (const char *arg)
   const char *extension = NULL;
   int rvc = 0;
   int i;
+
   for (i = 0; uppercase[i]; i++) uppercase[i] = toupper (uppercase[i]);
 
   if (strncmp (p, "RV32", 4) == 0)
@@ -179,22 +180,6 @@ parse_riscv_dis_option (const char *option)
         comma = strstr(where, ",");
         if (comma) *comma = '\0';
         riscv_set_arch(where);
-        if (comma) *comma = ',';
-    } else if ((where = strstr(option, "mchip="))&&(where==option)) {
-	int i;
-	char *uppercase;
-        char *comma;
-        where = option+6;
-        comma = strstr(where, ",");
-        if (comma) *comma = '\0';
-        uppercase = xstrdup (where);
-       for (i = 0; uppercase[i]; i++) uppercase[i] = toupper (uppercase[i]);
-	if (strstr(uppercase, "PULPINO")) riscv_set_arch ("RV32IMCXpulpv1");
-	else if (strstr(uppercase, "HONEY")) riscv_set_arch ("RV32IMCXpulpv0");
-	else if (strstr(uppercase, "GAP8")) riscv_set_arch ("RV32IMCXgap8");
-	else if (strstr(uppercase, "GAP9")) riscv_set_arch ("RV32IMCXgap9");
-	else if (strstr(uppercase, "HUA20")) riscv_set_arch ("RV32IMCXgap9");
-        else fprintf (stderr, _("Unrecognized mchip= : %s\n"), uppercase);
         if (comma) *comma = ',';
     } else {
       /* Invalid option.  */
@@ -393,17 +378,13 @@ print_insn_args (const char *d, insn_t l, bfd_vma pc, disassemble_info *info)
 	  break;
 
         case 'r':
-          print (info->stream, "%s", riscv_gpr_names[EXTRACT_OPERAND (RS3I, l)]);
+          print (info->stream, "%s",
+                 riscv_gpr_names[EXTRACT_OPERAND (RS3I, l)]);
           break;
 
-        case 'e':
-          print (info->stream, "%s", riscv_gpr_names[EXTRACT_OPERAND (RS3, l)]);
-          break;
-
-	case 'w':
-	  print (info->stream, "%s", riscv_gpr_names[EXTRACT_OPERAND (RS1, l)]);
 	case 't':
-	  print (info->stream, "%s", riscv_gpr_names[EXTRACT_OPERAND (RS2, l)]);
+	  print (info->stream, "%s",
+		 riscv_gpr_names[EXTRACT_OPERAND (RS2, l)]);
 	  break;
 
 	case 'u':

@@ -234,10 +234,6 @@ riscv_set_arch (const char *s)
                         if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_V3) Pulp_Chip.processor = PULP_V3;
                         else as_fatal("-Xpulpv3: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
                         break;
-		case PULP_NN:
-                        if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_NN) Pulp_Chip.processor = PULP_NN;
-                        else as_fatal("-Xpulpnn: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
-                        break;
 /* __GAP8 Start */
                 case PULP_GAP8:
                         if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_GAP8) Pulp_Chip.processor = PULP_GAP8;
@@ -247,11 +243,6 @@ riscv_set_arch (const char *s)
                 case PULP_SLIM:
                         if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_SLIM) Pulp_Chip.processor = PULP_SLIM;
                         else as_fatal("-Xpulpslim: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
-                        break;
-                case PULP_GAP9:
-                        if (Pulp_Chip.processor == PULP_NONE || Pulp_Chip.processor == PULP_GAP9) Pulp_Chip.processor = PULP_GAP9;
-                        else as_fatal("-Xgap9: pulp architecture is already defined as %s", PulpProcessorImage(Pulp_Chip.processor));
-			strcpy(subset, "XGAP9");
                         break;
                 case PULP_NONE:
                         if (Len==0) {
@@ -264,12 +255,13 @@ riscv_set_arch (const char *s)
 
         }
 
+
 	  extension = subset;
 	  riscv_add_subset (subset);
 	  p += strlen (subset);
 	  free (subset);
 	}
-      else if (*p == '_' || *p == '0')
+      else if (*p == '_')
 	p++;
       else if ((all_subsets = strchr (all_subsets, *p)) != NULL)
 	{
@@ -292,28 +284,20 @@ static void pulp_set_chip(const char *arg)
   char *uppercase = xstrdup (arg);
   char *p = uppercase;
   int i;
-as_fatal ("#### unsupported pulp chip %s", p);
 
   for (i = 0; uppercase[i]; i++) uppercase[i] = TOUPPER (uppercase[i]);
+
   if (strncmp (p, "PULPINO", 7) == 0) {
-        riscv_set_arch ("RV32IMCXpulpv1");
+        riscv_set_arch ("RV32IMXpulpv1");
         UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_PULPINO]);
   } else if (strncmp (p, "HONEY", 5) == 0) {
-        riscv_set_arch ("RV32IMCXpulpv0");
+        riscv_set_arch ("RV32IMXpulpv0");
         UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_HONEY]);
 /* __GAP8 Start */
   } else if (strncmp (p, "GAP8", 4) == 0) {
-        riscv_set_arch ("RV32IMCXgap8");
+        riscv_set_arch ("RV32IMXgap8");
         UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_GAP8]);
 /* __GAP8 Stop */
-  } else if (strncmp (p, "GAP9", 4) == 0) {
-        riscv_set_arch ("RV32IMCXgap9");
-        UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_GAP9]);
-  } else if (strncmp (p, "HUA20", 5) == 0) {
-        riscv_set_arch ("RV32IMCXgap9");
-	as_fatal ("#### unsupported pulp chip %s", p);
-        UpdatePulpChip(&Pulp_Chip, &Pulp_Defined_Chips[PULP_CHIP_GAP9]);
-	
   } else {
         as_fatal ("unsupported pulp chip %s", arg);
   }
@@ -664,12 +648,7 @@ validate_riscv_insn (const struct riscv_opcode *opc)
       case 'd':	USE_BITS (OP_MASK_RD,		OP_SH_RD);	if (*p == 'i') ++p; break;
       case 'm':	USE_BITS (OP_MASK_RM,		OP_SH_RM);	break;
       case 's':	USE_BITS (OP_MASK_RS1,		OP_SH_RS1);	break;
-      case 'w': USE_BITS (OP_MASK_RS1,          OP_SH_RS1); /* fallthru */
       case 't':	USE_BITS (OP_MASK_RS2,		OP_SH_RS2);	break;
-
-      case 'r': USE_BITS (OP_MASK_RS3I,         OP_SH_RS3I);    break;
-      case 'e': USE_BITS (OP_MASK_RS3,          OP_SH_RS3);    break;
-
       case 'P':	USE_BITS (OP_MASK_PRED,		OP_SH_PRED); break;
       case 'Q':	USE_BITS (OP_MASK_SUCC,		OP_SH_SUCC); break;
       case 'o':
@@ -1700,9 +1679,6 @@ rvc_lui:
 	    case 's':		/* Source register.  */
 	    case 't':		/* Target register.  */
 	    case 'r':
-	    case 'e':
-            case 'w':           /* rs1 and rs2 */
-
 	      if (reg_lookup (&s, RCLASS_GPR, &regno))
 		{
 		  c = *args;
@@ -1725,16 +1701,11 @@ rvc_lui:
                       }
 		      INSERT_OPERAND (RD, *ip, regno);
 		      break;
-                    case 'w':
-                      INSERT_OPERAND (RS1, *ip, regno); /* fallthru */
 		    case 't':
 		      INSERT_OPERAND (RS2, *ip, regno);
 		      break;
                     case 'r':
                       INSERT_OPERAND (RS3I, *ip, regno);
-                      break;
-                    case 'e':
-                      INSERT_OPERAND (RS3, *ip, regno);
                       break;
 		    }
 		  continue;
@@ -2099,12 +2070,11 @@ int
 md_parse_option (int c, const char *arg)
 {
   int Arg;
-  static int Defined = 0;
 
   switch (c)
     {
     case OPTION_MARCH:
-      if (!Defined) riscv_set_arch (arg);
+      riscv_set_arch (arg);
       break;
 
     case OPTION_NO_PIC:
@@ -2162,7 +2132,7 @@ md_parse_option (int c, const char *arg)
     case OPTION_CPU:
       break;
     case OPTION_CHIP:
-      pulp_set_chip(arg); Defined = 1;
+      pulp_set_chip(arg);
       break;
 
     default:
@@ -2892,7 +2862,6 @@ RISC-V options:\n\
   -fno-pic       don't generate position-independent code (default)\n\
   -march=ISA     set the RISC-V architecture\n\
   -mabi=ABI      set the RISC-V ABI\n\
-  -mchip=CHIP    set Pulp chip target\n\
   -mL2           set pulp L2 size to Value\n\
   -mL1Cl=Value   set pulp cluster L1 size to Value\n\
   -mL1Fc=Value   set pulp fabric controller L1 size, if any, to Value\n\
