@@ -1413,6 +1413,12 @@
 #define MATCH_VFCVT_AH_H 0x98601033
 #define MASK_VFCVT_AH_H  0xfff0707f
 
+/*      XLRWait        */
+#define MATCH_LRWAIT_W 0x3000202f
+#define MASK_LRWAIT_W  0xf9f0707f
+#define MATCH_SCWAIT_W 0x3800202f
+#define MASK_SCWAIT_W  0xf800707f
+
 
 
 #endif
