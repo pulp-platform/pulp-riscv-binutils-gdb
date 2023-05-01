@@ -26,6 +26,9 @@ extern FLONUM_TYPE generic_floating_point_number;
 /* Precision in LittleNums.  */
 /* Don't count the gap in the m68k extended precision format.  */
 #define MAX_PRECISION  5
+#define B_PRECISION    1
+#define H_PRECISION    1
+#define A_PRECISION    1
 #define F_PRECISION    2
 #define D_PRECISION    4
 #define X_PRECISION    5
@@ -190,6 +193,21 @@ atof_ieee (char *str,			/* Text to convert to binary.  */
 
   switch (what_kind)
     {
+    case 'b':
+      precision = B_PRECISION;
+      exponent_bits = 5;
+      break;
+
+    case 'h':
+      precision = H_PRECISION;
+      exponent_bits = 5;
+      break;
+
+    case 'a':
+      precision = A_PRECISION;
+      exponent_bits = 8;
+      break;
+
     case 'f':
     case 'F':
     case 's':
@@ -284,7 +302,11 @@ gen_to_words (LITTLENUM_TYPE *words, int precision, long exponent_bits)
     {
       if (TC_LARGEST_EXPONENT_IS_NORMAL (precision))
 	as_warn (_("NaNs are not supported by this target\n"));
-      if (precision == F_PRECISION)
+      if (precision == B_PRECISION || precision == H_PRECISION || precision == A_PRECISION)
+        {
+	  words[0] = 0x7fff;
+        }
+      else if (precision == F_PRECISION)
 	{
 	  words[0] = 0x7fff;
 	  words[1] = 0xffff;
@@ -325,7 +347,20 @@ gen_to_words (LITTLENUM_TYPE *words, int precision, long exponent_bits)
 	as_warn (_("Infinities are not supported by this target\n"));
 
       /* +INF:  Do the right thing.  */
-      if (precision == F_PRECISION)
+      if (precision == B_PRECISION)
+        {
+          words[0] = 0x7c00;
+        }
+      else if (precision == H_PRECISION)
+        {
+          words[0] = 0x7c00;
+        }
+      else if (precision == A_PRECISION)
+        {
+          words[0] = 0x7f80;
+        }
+
+      else if (precision == F_PRECISION)
 	{
 	  words[0] = 0x7f80;
 	  words[1] = 0;
@@ -366,7 +401,20 @@ gen_to_words (LITTLENUM_TYPE *words, int precision, long exponent_bits)
 	as_warn (_("Infinities are not supported by this target\n"));
 
       /* Negative INF.  */
-      if (precision == F_PRECISION)
+      if (precision == B_PRECISION)
+        {
+          words[0] = 0xfc00;
+        }
+      else if (precision == H_PRECISION)
+        {
+          words[0] = 0xfc00;
+        }
+      else if (precision == A_PRECISION)
+        {
+          words[0] = 0xff80;
+        }
+
+      else if (precision == F_PRECISION)
 	{
 	  words[0] = 0xff80;
 	  words[1] = 0x0;
@@ -723,6 +771,18 @@ ieee_md_atof (int type,
     {
       switch (type)
 	{
+	case 'b':
+	  prec = B_PRECISION;
+	  break;
+
+	case 'h':
+	  prec = H_PRECISION;
+	  break;
+
+	case 'a':
+	  prec = A_PRECISION;
+	  break;
+
 	case 'f':
 	case 'F':
 	case 's':

@@ -492,6 +492,17 @@ const struct riscv_opcode riscv_opcodes[] =
 {"fcvt.s.l",  "64F", "D,s,m",  MATCH_FCVT_S_L, MASK_FCVT_S_L, match_opcode, 0 },
 {"fcvt.s.lu", "64F", "D,s",  MATCH_FCVT_S_LU | MASK_RM, MASK_FCVT_S_L | MASK_RM, match_opcode, 0 },
 {"fcvt.s.lu", "64F", "D,s,m",  MATCH_FCVT_S_LU, MASK_FCVT_S_LU, match_opcode, 0 },
+/* RV64Xf8 Quarter-Precision Floating-Point Extension (in addition to RV32Xf8) */
+{"fcvt.l.b",  "64F", "d,s",  MATCH_FCVT_L_B | MASK_RM, MASK_FCVT_L_B | MASK_RM, match_opcode,  0 },
+{"fcvt.l.b",  "64F", "d,s,m",  MATCH_FCVT_L_B, MASK_FCVT_L_B, match_opcode,  0 },
+{"fcvt.lu.b", "64F", "d,s",  MATCH_FCVT_LU_B | MASK_RM, MASK_FCVT_LU_B | MASK_RM, match_opcode,  0 },
+{"fcvt.lu.b", "64F", "d,s,m",  MATCH_FCVT_LU_B, MASK_FCVT_LU_B, match_opcode,  0 },
+{"fcvt.b.l",  "64F", "d,s",  MATCH_FCVT_B_L | MASK_RM, MASK_FCVT_B_L | MASK_RM, match_opcode,   0 },
+{"fcvt.b.l",  "64F", "d,s,m",  MATCH_FCVT_B_L, MASK_FCVT_B_L, match_opcode,   0 },
+{"fcvt.b.lu", "64F", "d,s",  MATCH_FCVT_B_LU | MASK_RM, MASK_FCVT_B_L | MASK_RM, match_opcode, 0 },
+{"fcvt.b.lu", "64F", "d,s,m",  MATCH_FCVT_B_LU, MASK_FCVT_B_LU, match_opcode,  0 },
+
+	
 
 /* Double-precision floating-point instruction subset */
 {"fld",       "C",   "D,Cn(Cc)",  MATCH_C_FLDSP, MASK_C_FLDSP, match_opcode, INSN_ALIAS },
@@ -3455,6 +3466,11 @@ const struct riscv_opcode riscv_opcodes[] =
 {"fmulex.s.ah", "Xgap9", "d,s,t", 	MATCH_FMULEX_S_AH, 		MASK_FMULEX_S_AH, 	match_opcode, 0},
 {"fmacex.s.ah", "Xgap9", "d,s,t", 	MATCH_FMACEX_S_AH, 		MASK_FMACEX_S_AH, 	match_opcode, 0},
 
+// Xfaux Auxiliary Floating-Point Extension with Xf8, fmt=11 (binary8)
+{"fmulex.s.b",          "Xgap9", "d,s,t",   MATCH_FMULEX_S_B | MASK_RM, MASK_FMULEX_S_B | MASK_RM, match_opcode, 0},
+{"fmulex.s.b",          "Xgap9", "d,s,t,m", MATCH_FMULEX_S_B, MASK_FMULEX_S_B, match_opcode, 0},
+{"fmacex.s.b",          "Xgap9", "d,s,t",   MATCH_FMACEX_S_B | MASK_RM, MASK_FMACEX_S_B | MASK_RM, match_opcode, 0},
+{"fmacex.s.b",          "Xgap9", "d,s,t,m", MATCH_FMACEX_S_B, MASK_FMACEX_S_B, match_opcode, 0},
 
 /* Gap9 SIMD2 FP16ALT */
 {"vfadd.ah",    "Xgap9", "d,s,t",   	MATCH_VFADD_AH, 		MASK_VFADD_AH, 		match_opcode, 0},
@@ -3559,6 +3575,132 @@ const struct riscv_opcode riscv_opcodes[] =
 {"vfcvt.ah.h",  "Xgap9", "d,s",     	MATCH_VFCVT_AH_H, 		MASK_VFCVT_AH_H, 	match_opcode, 0},
 
 
+/* RV32Xf8 Quarter-Precision Floating-Point Extension, bit[26,25]=11 (binary8) */
+{"fmadd.b",   "Xgap9",   "d,s,t,e",  MATCH_FMADD_B | MASK_RM, MASK_FMADD_B | MASK_RM, match_opcode,   0 },
+{"fmadd.b",   "Xgap9",   "d,s,t,e,m",  MATCH_FMADD_B, MASK_FMADD_B, match_opcode, 0 },
+{"fmsub.b",   "Xgap9",   "d,s,t,e",  MATCH_FMSUB_B | MASK_RM, MASK_FMSUB_B | MASK_RM, match_opcode, 0 },
+{"fmsub.b",   "Xgap9",   "d,s,t,e,m",  MATCH_FMSUB_B, MASK_FMSUB_B, match_opcode,  0 },
+{"fnmsub.b",  "Xgap9",   "d,s,t,e",  MATCH_FNMSUB_B | MASK_RM, MASK_FNMSUB_B | MASK_RM, match_opcode,  0 },
+{"fnmsub.b",  "Xgap9",   "d,s,t,e,m",  MATCH_FNMSUB_B, MASK_FNMSUB_B, match_opcode, 0 },
+{"fnmadd.b",  "Xgap9",   "d,s,t,e",  MATCH_FNMADD_B | MASK_RM, MASK_FNMADD_B | MASK_RM, match_opcode, 0 },
+{"fnmadd.b",  "Xgap9",   "d,s,t,e,m",  MATCH_FNMADD_B, MASK_FNMADD_B, match_opcode,  0 },
+{"fadd.b",    "Xgap9",   "d,s,t",  MATCH_FADD_B | MASK_RM, MASK_FADD_B | MASK_RM, match_opcode, 0 },
+{"fadd.b",    "Xgap9",   "d,s,t,m",  MATCH_FADD_B, MASK_FADD_B, match_opcode, 0 },
+{"fsub.b",    "Xgap9",   "d,s,t",  MATCH_FSUB_B | MASK_RM, MASK_FSUB_B | MASK_RM, match_opcode, 0 },
+{"fsub.b",    "Xgap9",   "d,s,t,m",  MATCH_FSUB_B, MASK_FSUB_B, match_opcode,  0 },
+{"fmul.b",    "Xgap9",   "d,s,t",  MATCH_FMUL_B | MASK_RM, MASK_FMUL_B | MASK_RM, match_opcode,   0 },
+{"fmul.b",    "Xgap9",   "d,s,t,m",  MATCH_FMUL_B, MASK_FMUL_B, match_opcode,  0 },
+{"fdiv.b",    "Xgap9",   "d,s,t",  MATCH_FDIV_B | MASK_RM, MASK_FDIV_B | MASK_RM, match_opcode,   0 },
+{"fdiv.b",    "Xgap9",   "d,s,t,m",  MATCH_FDIV_B, MASK_FDIV_B, match_opcode,   0 },
+{"fsqrt.b",   "Xgap9",   "d,s",  MATCH_FSQRT_B | MASK_RM, MASK_FSQRT_B | MASK_RM, match_opcode,  0 },
+{"fsqrt.b",   "Xgap9",   "d,s,m",  MATCH_FSQRT_B, MASK_FSQRT_B, match_opcode,  0 },
+{"fsgnj.b",   "Xgap9",   "d,s,t",  MATCH_FSGNJ_B, MASK_FSGNJ_B, match_opcode,  0 },
+{"fsgnjn.b",  "Xgap9",   "d,s,t",  MATCH_FSGNJN_B, MASK_FSGNJN_B, match_opcode,  0 },
+{"fsgnjx.b",  "Xgap9",   "d,s,t",  MATCH_FSGNJX_B, MASK_FSGNJX_B, match_opcode,   0},
+{"fmin.b",    "Xgap9",   "d,s,t",  MATCH_FMIN_B, MASK_FMIN_B, match_opcode,   0 },
+{"fmax.b",    "Xgap9",   "d,s,t",  MATCH_FMAX_B, MASK_FMAX_B, match_opcode,   0 },
+{"feq.b",     "Xgap9",   "d,s,t",    MATCH_FEQ_B, MASK_FEQ_B, match_opcode,  0 },
+{"flt.b",     "Xgap9",   "d,s,t",    MATCH_FLT_B, MASK_FLT_B, match_opcode,  0 },
+{"fle.b",     "Xgap9",   "d,s,t",    MATCH_FLE_B, MASK_FLE_B, match_opcode,  0 },
+{"fcvt.w.b",  "Xgap9",   "d,s",  MATCH_FCVT_W_B | MASK_RM, MASK_FCVT_W_B | MASK_RM, match_opcode,  0},
+{"fcvt.w.b",  "Xgap9",   "d,s,m",  MATCH_FCVT_W_B, MASK_FCVT_W_B, match_opcode,  0 },
+{"fcvt.wu.b", "Xgap9",   "d,s",  MATCH_FCVT_WU_B | MASK_RM, MASK_FCVT_WU_B | MASK_RM, match_opcode, 0},
+{"fcvt.wu.b", "Xgap9",   "d,s,m",  MATCH_FCVT_WU_B, MASK_FCVT_WU_B, match_opcode,  0 },
+{"fcvt.b.w",  "Xgap9",   "d,s",  MATCH_FCVT_B_W | MASK_RM, MASK_FCVT_B_W | MASK_RM, match_opcode,  0 },
+{"fcvt.b.w",  "Xgap9",   "d,s,m",  MATCH_FCVT_B_W, MASK_FCVT_B_W, match_opcode,   0 },
+{"fcvt.b.wu", "Xgap9",   "d,s",  MATCH_FCVT_B_WU | MASK_RM, MASK_FCVT_B_W | MASK_RM, match_opcode,  0},
+{"fcvt.b.wu", "Xgap9",   "d,s,m",  MATCH_FCVT_B_WU, MASK_FCVT_B_WU, match_opcode, 0 },
+{"fclass.b",  "Xgap9",   "d,s",  MATCH_FCLASS_B, MASK_FCLASS_B, match_opcode,  0 },
+//pseudos
+{"fgt.b",     "Xgap9",   "d,t,s",    MATCH_FLT_B, MASK_FLT_B, match_opcode,  0 },
+{"fge.b",     "Xgap9",   "d,t,s",    MATCH_FLE_B, MASK_FLE_B, match_opcode,  0 },
+{"fabs.b",    "Xgap9",   "d,w",  MATCH_FSGNJX_B, MASK_FSGNJX_B, match_rs1_eq_rs2,   0 },
+{"fneg.b",    "Xgap9",   "d,w",  MATCH_FSGNJN_B, MASK_FSGNJN_B, match_rs1_eq_rs2,   0 },
+
+/* Conversions with F Standard Extension */
+{"fcvt.s.b",  "Xgap9",  "d,s",         MATCH_FCVT_S_B,                MASK_FCVT_S_B,         match_opcode, 0 },	
+{"fcvt.b.s",  "Xgap9",   "d,s",  MATCH_FCVT_B_S | MASK_RM, MASK_FCVT_B_S | MASK_RM, match_opcode, 0 },
+{"fcvt.b.s",  "Xgap9",   "d,s,m",  MATCH_FCVT_B_S, MASK_FCVT_B_S, match_opcode,   0 },
+
+/* Conversions with D Standard Extension (in addition to the above) */
+{"fcvt.d.b",  "Xgap9",   "d,s",  MATCH_FCVT_D_B, MASK_FCVT_D_B, match_opcode,  0 },
+{"fcvt.b.d",  "Xgap9",   "d,s",  MATCH_FCVT_B_D | MASK_RM, MASK_FCVT_B_D | MASK_RM, match_opcode, 0 },
+{"fcvt.b.d",  "Xgap9",   "d,s,m",  MATCH_FCVT_B_D, MASK_FCVT_B_D, match_opcode,  0 },
+
+/* Conversions with Xf16 Extension */
+{"fcvt.h.b",  "Xgap9",   "d,s",  MATCH_FCVT_H_B, MASK_FCVT_H_B, match_opcode,  0 },
+{"fcvt.b.h",  "Xgap9",   "d,s",  MATCH_FCVT_B_H | MASK_RM, MASK_FCVT_B_H | MASK_RM, match_opcode, 0 },
+{"fcvt.b.h",  "Xgap9",   "d,s,m",  MATCH_FCVT_B_H, MASK_FCVT_B_H, match_opcode, 0 },
+
+/* Conversions with Xf16alt Extension */
+{"fcvt.ah.b",  "Xgap9",  "d,s",  MATCH_FCVT_AH_B, MASK_FCVT_AH_B, match_opcode, 0 },
+{"fcvt.b.ah", "Xgap9",   "d,s",  MATCH_FCVT_B_AH | MASK_RM, MASK_FCVT_B_AH | MASK_RM, match_opcode, 0 },
+{"fcvt.b.ah", "Xgap9",   "d,s,m",  MATCH_FCVT_B_AH, MASK_FCVT_B_AH, match_opcode, 0 },
+
+// Xfvec Vectorial Floating-Point Ext. with Xf8, FLEN>=16, vfmt=11 (binary8)
+{"vfadd.b",               "Xgap9", "d,s,t", MATCH_VFADD_B, MASK_VFADD_B, match_opcode, 0},
+{"vfadd.r.b",           "Xgap9", "d,s,t",   MATCH_VFADD_R_B, MASK_VFADD_R_B, match_opcode, 0},
+{"vfsub.b",               "Xgap9", "d,s,t", MATCH_VFSUB_B, MASK_VFSUB_B, match_opcode, 0},
+{"vfsub.r.b",           "Xgap9", "d,s,t",   MATCH_VFSUB_R_B, MASK_VFSUB_R_B, match_opcode, 0},
+{"vfmul.b",               "Xgap9", "d,s,t", MATCH_VFMUL_B, MASK_VFMUL_B, match_opcode, 0},
+{"vfmul.r.b",           "Xgap9", "d,s,t",   MATCH_VFMUL_R_B, MASK_VFMUL_R_B, match_opcode, 0},
+{"vfdiv.b",               "Xgap9", "d,s,t", MATCH_VFDIV_B, MASK_VFDIV_B, match_opcode, 0},
+{"vfdiv.r.b",           "Xgap9", "d,s,t",   MATCH_VFDIV_R_B, MASK_VFDIV_R_B, match_opcode, 0},
+{"vfmin.b",               "Xgap9", "d,s,t", MATCH_VFMIN_B, MASK_VFMIN_B, match_opcode, 0},
+{"vfmin.r.b",           "Xgap9", "d,s,t",   MATCH_VFMIN_R_B, MASK_VFMIN_R_B, match_opcode, 0},
+{"vfmax.b",               "Xgap9", "d,s,t", MATCH_VFMAX_B, MASK_VFMAX_B, match_opcode, 0},
+{"vfmax.r.b",           "Xgap9", "d,s,t",   MATCH_VFMAX_R_B, MASK_VFMAX_R_B, match_opcode, 0},
+{"vfsqrt.b",            "Xgap9", "d,s",     MATCH_VFSQRT_B, MASK_VFSQRT_B, match_opcode, 0},
+{"vfmac.b",               "Xgap9", "d,s,t", MATCH_VFMAC_B, MASK_VFMAC_B, match_opcode, 0},
+{"vfmac.r.b",           "Xgap9", "d,s,t",   MATCH_VFMAC_R_B, MASK_VFMAC_R_B, match_opcode, 0},
+{"vfmre.b",               "Xgap9", "d,s,t", MATCH_VFMRE_B, MASK_VFMRE_B, match_opcode, 0},
+{"vfmre.r.b",           "Xgap9", "d,s,t",   MATCH_VFMRE_R_B, MASK_VFMRE_R_B, match_opcode, 0},
+{"vfclass.b",           "Xgap9", "d,s",     MATCH_VFCLASS_B, MASK_VFCLASS_B, match_opcode, 0},
+{"vfsgnj.b",            "Xgap9", "d,s,t",   MATCH_VFSGNJ_B, MASK_VFSGNJ_B, match_opcode, 0},
+{"vfsgnj.r.b",  "Xgap9", "d,s,t",   MATCH_VFSGNJ_R_B, MASK_VFSGNJ_R_B, match_opcode, 0},
+{"vfsgnjn.b",           "Xgap9", "d,s,t",   MATCH_VFSGNJN_B, MASK_VFSGNJN_B, match_opcode, 0},
+{"vfsgnjn.r.b", "Xgap9", "d,s,t",   MATCH_VFSGNJN_R_B, MASK_VFSGNJN_R_B, match_opcode, 0},
+{"vfsgnjx.b",           "Xgap9", "d,s,t",   MATCH_VFSGNJX_B, MASK_VFSGNJX_B, match_opcode, 0},
+{"vfsgnjx.r.b", "Xgap9", "d,s,t",   MATCH_VFSGNJX_R_B, MASK_VFSGNJX_R_B, match_opcode, 0},
+{"vfeq.b",                "Xgap9", "d,s,t", MATCH_VFEQ_B, MASK_VFEQ_B, match_opcode, 0},
+{"vfeq.r.b",            "Xgap9", "d,s,t",   MATCH_VFEQ_R_B, MASK_VFEQ_R_B, match_opcode, 0},
+{"vfne.b",                "Xgap9", "d,s,t", MATCH_VFNE_B, MASK_VFNE_B, match_opcode, 0},
+{"vfne.r.b",            "Xgap9", "d,s,t",   MATCH_VFNE_R_B, MASK_VFNE_R_B, match_opcode, 0},
+{"vflt.b",                "Xgap9", "d,s,t", MATCH_VFLT_B, MASK_VFLT_B, match_opcode, 0},
+{"vflt.r.b",            "Xgap9", "d,s,t",   MATCH_VFLT_R_B, MASK_VFLT_R_B, match_opcode, 0},
+{"vfge.b",                "Xgap9", "d,s,t", MATCH_VFGE_B, MASK_VFGE_B, match_opcode, 0},
+{"vfge.r.b",            "Xgap9", "d,s,t",   MATCH_VFGE_R_B, MASK_VFGE_R_B, match_opcode, 0},
+{"vfle.b",                "Xgap9", "d,s,t", MATCH_VFLE_B, MASK_VFLE_B, match_opcode, 0},
+{"vfle.r.b",            "Xgap9", "d,s,t",   MATCH_VFLE_R_B, MASK_VFLE_R_B, match_opcode, 0},
+{"vfgt.b",                "Xgap9", "d,s,t", MATCH_VFGT_B, MASK_VFGT_B, match_opcode, 0},
+{"vfgt.r.b",            "Xgap9", "d,s,t",   MATCH_VFGT_R_B, MASK_VFGT_R_B, match_opcode, 0},
+// Unless RV32D Supported
+{"vfcvt.x.b",           "Xgap9", "d,s",     MATCH_VFCVT_X_B, MASK_VFCVT_X_B, match_opcode, 0},
+{"vfcvt.xu.b",  "Xgap9", "d,s",     MATCH_VFCVT_XU_B, MASK_VFCVT_XU_B, match_opcode, 0},
+{"vfcvt.b.x",           "Xgap9", "d,s",     MATCH_VFCVT_B_X, MASK_VFCVT_B_X, match_opcode, 0},
+{"vfcvt.b.xu",  "Xgap9", "d,s",     MATCH_VFCVT_B_XU, MASK_VFCVT_B_XU, match_opcode, 0},
+// Conversions when F Standard Extension Supported
+{"vfcpka.b.s",  "Xgap9", "d,s,t",   MATCH_VFCPKA_B_S, MASK_VFCPKA_B_S, match_opcode, 0},
+{"vfcpkb.b.s",  "Xgap9", "d,s,t",   MATCH_VFCPKB_B_S, MASK_VFCPKB_B_S, match_opcode, 0},
+// Conversions when D Standard Extension Supported (in addition to the above)
+{"vfcvt.s.b",           "Xgap9", "d,s",     MATCH_VFCVT_S_B, MASK_VFCVT_S_B, match_opcode, 0},
+{"vfcvt.b.s",           "Xgap9", "d,s",     MATCH_VFCVT_B_S, MASK_VFCVT_B_S, match_opcode, 0},
+{"vfcpkc.b.s",  "Xgap9", "d,s,t",   MATCH_VFCPKC_B_S, MASK_VFCPKC_B_S, match_opcode, 0},
+{"vfcpkd.b.s",  "Xgap9", "d,s,t",   MATCH_VFCPKD_B_S, MASK_VFCPKD_B_S, match_opcode, 0},
+{"vfcpka.b.d",  "Xgap9", "d,s,t",   MATCH_VFCPKA_B_D, MASK_VFCPKA_B_D, match_opcode, 0},
+{"vfcpkb.b.d",  "Xgap9", "d,s,t",   MATCH_VFCPKB_B_D, MASK_VFCPKB_B_D, match_opcode, 0},
+{"vfcpkc.b.d",  "Xgap9", "d,s,t",   MATCH_VFCPKC_B_D, MASK_VFCPKC_B_D, match_opcode, 0},
+{"vfcpkd.b.d",  "Xgap9", "d,s,t",   MATCH_VFCPKD_B_D, MASK_VFCPKD_B_D, match_opcode, 0},
+// Conversions when Xf16 Extension Supported
+{"vfcvt.h.b",           "Xgap9", "d,s",     MATCH_VFCVT_H_B, MASK_VFCVT_H_B, match_opcode, 0},
+{"vfcvt.b.h",           "Xgap9", "d,s",     MATCH_VFCVT_B_H, MASK_VFCVT_B_H, match_opcode, 0},
+// Conversions when Xf16alt Extension Supported
+{"vfcvt.ah.b",  "Xgap9", "d,s",     MATCH_VFCVT_AH_B, MASK_VFCVT_AH_B, match_opcode, 0},
+{"vfcvt.b.ah",  "Xgap9", "d,s",     MATCH_VFCVT_B_AH, MASK_VFCVT_B_AH, match_opcode, 0},
+// pseudos
+{"vfabs.b",    "Xgap9",   "d,w",  MATCH_VFSGNJX_B, MASK_VFSGNJX_B, match_rs1_eq_rs2,   INSN_ALIAS },
+{"vfneg.b",    "Xgap9",   "d,w",  MATCH_VFSGNJN_B, MASK_VFSGNJN_B, match_rs1_eq_rs2,   INSN_ALIAS },
+	
 /***********************************************************************************************************************/
 /**************************************     End of Gap9              ***************************************************/
 /***********************************************************************************************************************/

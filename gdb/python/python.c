@@ -1611,6 +1611,14 @@ finalize_python (void *ignore)
 }
 #endif
 
+#ifdef IS_PY3K
+PyMODINIT_FUNC
+PyInit__gdb (void)
+{
+  return PyModule_Create (&python_GdbModuleDef);
+}
+#endif
+
 /* Provide a prototype to silence -Wmissing-prototypes.  */
 extern initialize_file_ftype _initialize_python;
 
@@ -1730,6 +1738,9 @@ message == an error message without a stack will be printed."),
      remain alive for the duration of the program's execution, so
      it is not freed after this call.  */
   Py_SetProgramName (progname_copy);
+
+  /* Define _gdb as a built-in module.  */
+  PyImport_AppendInittab ("_gdb", PyInit__gdb);
 #else
   Py_SetProgramName (progname);
 #endif
@@ -1739,9 +1750,7 @@ message == an error message without a stack will be printed."),
   PyEval_InitThreads ();
 
 #ifdef IS_PY3K
-  gdb_module = PyModule_Create (&python_GdbModuleDef);
-  /* Add _gdb module to the list of known built-in modules.  */
-  _PyImport_FixupBuiltin (gdb_module, "_gdb");
+  gdb_module = PyImport_ImportModule ("_gdb");
 #else
   gdb_module = Py_InitModule ("_gdb", python_GdbMethods);
 #endif
