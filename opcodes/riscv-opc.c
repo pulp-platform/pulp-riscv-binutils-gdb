@@ -3797,6 +3797,29 @@ const struct riscv_opcode riscv_opcodes[] =
 {"pv.pack",   "Xpulpimg", "d,s,t",  MATCH_V_OP_PACK|MATCH_V_OP_H_VV,  MASK_V_OP,  match_opcode, 0},
 {"pv.pack.h", "Xpulpimg", "d,s,t",  MATCH_V_OP_PACKH|MATCH_V_OP_H_VV,  MASK_V_OP,  match_opcode, 0},
 
+/* Floating-point mapped to integer register-file */
+
+{"vfadd.h",    "Xpulpimg", "d,s,t", MATCH_VFADD_H,        MASK_VFADD_H,    match_opcode, 0},
+{"vfadd.r.h",  "Xpulpimg", "d,s,t", MATCH_VFADD_R_H,      MASK_VFADD_R_H,  match_opcode, 0},
+{"vfsub.h",    "Xpulpimg", "d,s,t", MATCH_VFSUB_H,        MASK_VFSUB_H,    match_opcode, 0},
+{"vfsub.r.h",  "Xpulpimg", "d,s,t", MATCH_VFSUB_R_H,      MASK_VFSUB_R_H,  match_opcode, 0},
+{"vfmul.h",    "Xpulpimg", "d,s,t", MATCH_VFMUL_H,        MASK_VFMUL_H,    match_opcode, 0},
+{"vfmul.r.h",  "Xpulpimg", "d,s,t", MATCH_VFMUL_R_H,      MASK_VFMUL_R_H,  match_opcode, 0},
+{"vfcpka.h.s", "Xpulpimg", "d,s,t", MATCH_VFCPKA_H_S,     MASK_VFCPKA_H_S, match_opcode, 0},
+
+{"fmadd.s", "Xpulpimg", "d,s,t,e",   MATCH_FMADD_S | MASK_RM, MASK_FMADD_S | MASK_RM, match_opcode, 0},
+{"fmadd.s", "Xpulpimg", "d,s,t,e,m", MATCH_FMADD_S,           MASK_FMADD_S,           match_opcode, 0},
+{"fadd.s",  "Xpulpimg", "d,s,t",     MATCH_FADD_S | MASK_RM,  MASK_FADD_S | MASK_RM,  match_opcode, 0},
+{"fadd.s",  "Xpulpimg", "d,s,t,m",   MATCH_FADD_S,            MASK_FADD_S,            match_opcode, 0},
+{"fsub.s",  "Xpulpimg", "d,s,t",     MATCH_FSUB_S | MASK_RM,  MASK_FSUB_S | MASK_RM,  match_opcode, 0},
+{"fsub.s",  "Xpulpimg", "d,s,t,m",   MATCH_FSUB_S,            MASK_FSUB_S,            match_opcode, 0},
+{"fmul.s",  "Xpulpimg", "d,s,t",     MATCH_FMUL_S | MASK_RM,  MASK_FMUL_S | MASK_RM,  match_opcode, 0},
+{"fmul.s",  "Xpulpimg", "d,s,t,m",   MATCH_FMUL_S,            MASK_FMUL_S,            match_opcode, 0},
+
+{"vfdotpex.s.h",   "Xpulpimg", "d,s,t", MATCH_VFDOTPEX_S_H,   MASK_VFDOTPEX_S_H,   match_opcode, 0},
+{"vfdotpex.s.r.h", "Xpulpimg", "d,s,t", MATCH_VFDOTPEX_S_R_H, MASK_VFDOTPEX_S_R_H, match_opcode, 0},
+{"fcdotpex.s.h",   "Xpulpimg", "d,s,t", MATCH_FCDOTPEX_S_H,   MASK_FCDOTPEX_S_H,   match_opcode, 0},
+
 /***********************************************************************************************************************/
 /**************************************       End of Xpulpimg        ***************************************************/
 /***********************************************************************************************************************/
