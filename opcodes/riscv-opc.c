@@ -3462,9 +3462,13 @@ const struct riscv_opcode riscv_opcodes[] =
 {"fcvt.h.ah", 	"Xgap9",  "d,s,m",  	MATCH_FCVT_H_AH, 		MASK_FCVT_H_AH, 	match_opcode, 0 },
 {"fcvt.ah.h", 	"Xgap9",  "d,s",    	MATCH_FCVT_AH_H, 		MASK_FCVT_AH_H, 	match_opcode, 0 },
 
+/* Gap9 FP16,  Fp16, Fp16 => Fp32 */
+{"fmulex.s.h", "Xgap9", "d,s,t", 	MATCH_FMULEX_S_H, 		MASK_FMULEX_S_H, 	match_opcode, 0},
+{"fmacex.s.h", "Xgap9", "d,s,t", 	MATCH_FMACEX_S_H, 		MASK_FMACEX_S_H, 	match_opcode, 0},
+
 /* Gap9 FP16 ALT,  Fp16Alt, Fp16Alt => Fp32 */
-{"fmulex.s.ah", "Xgap9", "d,s,t", 	MATCH_FMULEX_S_AH, 		MASK_FMULEX_S_AH, 	match_opcode, 0},
-{"fmacex.s.ah", "Xgap9", "d,s,t", 	MATCH_FMACEX_S_AH, 		MASK_FMACEX_S_AH, 	match_opcode, 0},
+{"fmulex.s.ah", "Xgap9", "d,s,t",       MATCH_FMULEX_S_AH,              MASK_FMULEX_S_AH,       match_opcode, 0},
+{"fmacex.s.ah", "Xgap9", "d,s,t",       MATCH_FMACEX_S_AH,              MASK_FMACEX_S_AH,       match_opcode, 0},
 
 // Xfaux Auxiliary Floating-Point Extension with Xf8, fmt=11 (binary8)
 {"fmulex.s.b",          "Xgap9", "d,s,t",   MATCH_FMULEX_S_B | MASK_RM, MASK_FMULEX_S_B | MASK_RM, match_opcode, 0},
