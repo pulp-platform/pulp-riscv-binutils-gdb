@@ -3462,21 +3462,25 @@ const struct riscv_opcode riscv_opcodes[] =
 {"fcvt.h.ah", 	"Xgap9",  "d,s,m",  	MATCH_FCVT_H_AH, 		MASK_FCVT_H_AH, 	match_opcode, 0 },
 {"fcvt.ah.h", 	"Xgap9",  "d,s",    	MATCH_FCVT_AH_H, 		MASK_FCVT_AH_H, 	match_opcode, 0 },
 
+/* Gap9 FP16 ALT,  Fp16Alt, Fp16Alt => Fp32 */
+{"fmulex.s.ah", "Xgap9", "d,s,t",       MATCH_FMULEX_S_AH,              MASK_FMULEX_S_AH,       match_opcode, 0},
+{"fmacex.s.ah", "Xgap9", "d,s,t",       MATCH_FMACEX_S_AH,              MASK_FMACEX_S_AH,       match_opcode, 0},
+{"vfdotpex.s.ah", "Xgap9", "d,s,t",     MATCH_VFDOTPEX_S_AH,            MASK_VFDOTPEX_S_AH,     match_opcode, 0},
+
 /* Gap9 FP16,  Fp16, Fp16 => Fp32 */
 {"fmulex.s.h", "Xgap9", "d,s,t",   	MATCH_FMULEX_S_H | MASK_RM, 		MASK_FMULEX_S_H | MASK_RM, 	match_opcode, 0},
 {"fmulex.s.h", "Xgap9", "d,s,t,m", 	MATCH_FMULEX_S_H, 		MASK_FMULEX_S_H, 	match_opcode, 0},
 {"fmacex.s.h", "Xgap9", "d,s,t",  	MATCH_FMACEX_S_H | MASK_RM, 		MASK_FMACEX_S_H | MASK_RM, 	match_opcode, 0},
 {"fmacex.s.h", "Xgap9", "d,s,t,m", 	MATCH_FMACEX_S_H, 		MASK_FMACEX_S_H, 	match_opcode, 0},
-
-/* Gap9 FP16 ALT,  Fp16Alt, Fp16Alt => Fp32 */
-{"fmulex.s.ah", "Xgap9", "d,s,t",       MATCH_FMULEX_S_AH,              MASK_FMULEX_S_AH,       match_opcode, 0},
-{"fmacex.s.ah", "Xgap9", "d,s,t",       MATCH_FMACEX_S_AH,              MASK_FMACEX_S_AH,       match_opcode, 0},
+{"vfdotpex.s.h", "Xgap9", "d,s,t",      MATCH_VFDOTPEX_S_H,             MASK_VFDOTPEX_S_H,           match_opcode, 0},
 
 // Xfaux Auxiliary Floating-Point Extension with Xf8, fmt=11 (binary8)
 {"fmulex.s.b",          "Xgap9", "d,s,t",   MATCH_FMULEX_S_B | MASK_RM, MASK_FMULEX_S_B | MASK_RM, match_opcode, 0},
 {"fmulex.s.b",          "Xgap9", "d,s,t,m", MATCH_FMULEX_S_B, MASK_FMULEX_S_B, match_opcode, 0},
 {"fmacex.s.b",          "Xgap9", "d,s,t",   MATCH_FMACEX_S_B | MASK_RM, MASK_FMACEX_S_B | MASK_RM, match_opcode, 0},
 {"fmacex.s.b",          "Xgap9", "d,s,t,m", MATCH_FMACEX_S_B, MASK_FMACEX_S_B, match_opcode, 0},
+{"vfdotpex.s.b", "Xgap9", "d,s,t",    MATCH_VFDOTPEX_S_B,             MASK_VFDOTPEX_S_B,           match_opcode, 0},
+
 
 /* Gap9 SIMD2 FP16ALT */
 {"vfadd.ah",    "Xgap9", "d,s,t",   	MATCH_VFADD_AH, 		MASK_VFADD_AH, 		match_opcode, 0},
