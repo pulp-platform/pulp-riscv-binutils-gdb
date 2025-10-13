@@ -47,6 +47,7 @@
 #endif
 
 #include <stdio.h>
+#include <sys/ioctl.h>
 
 /* System-specific feature definitions and include files. */
 #include "rldefs.h"
