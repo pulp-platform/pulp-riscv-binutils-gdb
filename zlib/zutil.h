@@ -21,6 +21,12 @@
 
 #include "zlib.h"
 
+/* Fix for macOS: prevent fdopen redefinition conflicts */
+#ifdef fdopen
+#undef fdopen
+#endif
+#define fdopen(fd,mode) fdopen(fd,mode)
+
 #if defined(STDC) && !defined(Z_SOLO)
 #  if !(defined(_WIN32_WCE) && defined(_MSC_VER))
 #    include <stddef.h>
@@ -119,17 +125,23 @@ extern z_const char * const z_errmsg[10]; /* indexed by 2-zlib_error */
 #endif
 
 #if defined(MACOS) || defined(TARGET_OS_MAC)
-#  define OS_CODE  0x07
+#  define OS_CODE 0x07
+
 #  ifndef Z_SOLO
 #    if defined(__MWERKS__) && __dest_os != __be_os && __dest_os != __win32_os
 #      include <unix.h> /* for fdopen */
 #    else
 #      ifndef fdopen
-#        define fdopen(fd,mode) NULL /* No fdopen() */
+#        ifdef fdopen
+#          undef fdopen
+#        endif
+#        define fdopen(fd, mode) NULL /* No fdopen() */
 #      endif
 #    endif
 #  endif
+
 #endif
+
 
 #ifdef TOPS20
 #  define OS_CODE  0x0a

@@ -51,6 +51,10 @@
 
 #ifdef __cplusplus
 
+#if __cplusplus >= 201103L
+#include <type_traits>
+#endif
+
 /* Traits type used to prevent the global operator overloads from
    instantiating for non-flag enums.  */
 template<typename T> struct enum_flags_type {};
@@ -66,6 +70,7 @@ template<typename T> struct enum_flags_type {};
     typedef enum_flags<enum_type> type;			\
   }
 
+#if __cplusplus < 201103L
 /* Until we can rely on std::underlying type being universally
    available (C++11), roll our own for enums.  */
 template<int size, bool sign> class integer_for_size { typedef void type; };
@@ -85,6 +90,13 @@ struct enum_underlying_type
     integer_for_size<sizeof (T), static_cast<bool>(T (-1) < T (0))>::type
     type;
 };
+#else
+template<typename T>
+struct enum_underlying_type
+{
+  typedef typename std::underlying_type<T>::type type;
+};
+#endif
 
 template <typename E>
 class enum_flags
