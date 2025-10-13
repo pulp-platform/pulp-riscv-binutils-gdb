@@ -238,9 +238,12 @@ prepare_terminal_settings (meta_flag, oldtio, tiop)
      TIOTYPE oldtio, *tiop;
 {
   _rl_echoing_p = (oldtio.sgttyb.sg_flags & ECHO);
-  _rl_echoctl = (oldtio.sgttyb.sg_flags & ECHOCTL);
-
-  /* Copy the original settings to the structure we're going to use for
+#if defined(ECHOCTL)
+    _rl_echoctl = (oldtio.c_lflag & ECHOCTL);
+#else
+    _rl_echoctl = 0;  /* macOS or systems without ECHOCTL */
+#endif
+    /* Copy the original settings to the structure we're going to use for
      our settings. */
   tiop->sgttyb = oldtio.sgttyb;
   tiop->lflag = oldtio.lflag;
